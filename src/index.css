@@ -25,6 +25,7 @@ body {
   display: grid;
   gap: 2rem;
   margin: 0 auto;
+  /* align-items: start; */
 }
 
 @media (min-width: 768px) {

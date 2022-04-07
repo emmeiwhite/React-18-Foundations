@@ -1,43 +1,52 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { Children } from "react";
+import { createRoot } from "react-dom/client";
 
 // CSS
 import "./index.css";
 
-// props as objects
+// Booklist to iterate over | Refactoring the app
 
-const book1 = {
-  author: "Geetanjali Shree, Daisy Rockwell",
-  image:
-    "	https://images-eu.ssl-images-amazon.com/images/I/41Hp+mTN4oL._AC_SX184_.jpg",
-  title: "Tomb of Sand",
-};
-
-const book2 = {
-  author: "S. Hussain Zaidi",
-  image:
-    "https://images-eu.ssl-images-amazon.com/images/I/51RFcsBf5jL._AC_SX184_.jpg",
-  title: "Zero Day",
-};
+const books = [
+  {
+    author: "S. Hussain Zaidi",
+    image:
+      "https://images-eu.ssl-images-amazon.com/images/I/51RFcsBf5jL._AC_SX184_.jpg",
+    title: "Zero Day",
+  },
+  {
+    author: "Geetanjali Shree, Daisy Rockwell",
+    image:
+      "https://images-eu.ssl-images-amazon.com/images/I/41Hp+mTN4oL._AC_SX184_.jpg",
+    title: "Tomb of Sand",
+  },
+  {
+    author: "Ambai, GJV Prasad",
+    image:
+      "https://images-eu.ssl-images-amazon.com/images/I/51P+-7JEJdL._AC_SX184_.jpg",
+    title: "A Red-necked Green Bird ",
+  },
+];
 
 // BookList Component
 function BookList() {
-  return (
-    <section className="booklist">
-      <Book title={book1.title} author={book1.author} image={book1.image} />
-      <Book title={book2.title} author={book2.author} image={book2.image} />
-    </section>
-  );
+  const bookList = books.map((book) => <Book {...book} key={book.id} />);
+  return <section className="booklist">{bookList}</section>;
 }
 
-const Book = ({ title, author, image }) => {
+function handleHover(title) {
+  console.log(title);
+}
+
+const Book = ({ title, author, image, children }) => {
   return (
-    <article className="book">
+    <article className={"book"} onMouseOver={() => handleHover(title)}>
       <img src={image} alt={`Book by ${author}`} />
       <h3>{title}</h3>
-      <p>{author}</p>
+      <p style={{ color: "orange" }}>{author}</p>
+      <p>{children}</p>
     </article>
   );
 };
 
-ReactDOM.render(<BookList />, document.querySelector("#root"));
+const root = createRoot(document.getElementById("root"));
+root.render(<BookList />);
