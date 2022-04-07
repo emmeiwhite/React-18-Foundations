@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./App";
 
 // Component
 function Greeting() {
   return (
     <main>
-      <h1>Adventure is out there</h1>
+      <App />
     </main>
   );
 }
